@@ -13,6 +13,14 @@
 #
 
 class Cat < ApplicationRecord
+    COLORS = ['Black', 'Yellow', 'Gray', 'White']
     validates :sex, inclusion: {in: ['M', 'F']}
     validates :birth_date, :color, :name, :sex, presence: true
+
+    has_many :cat_rental_requests,
+        primary_key: :id,
+        foreign_key: :cat_id,
+        class_name: :CatRentalRequest,
+        dependent: :destroy
+
 end
